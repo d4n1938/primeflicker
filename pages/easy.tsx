@@ -4,10 +4,11 @@ import { useKey } from "rooks";
 import Nav from "./nav";
 
 const easy = () => {
-  let answer;
+  let answer = 0;
   let answerIndex;
   let random = [];
   const primenum = [2, 3, 5, 7, 11];
+  const [isAnswer, setAnswer] = useState();
   const [rootNum, setRootNum] = useState(0);
   const [numList, setNumList] = useState([0, 0, 0, 0]);
   const [isError, setIsError] = useState<Boolean[]>([
@@ -35,7 +36,7 @@ const easy = () => {
     errorCheck(3);
   });
   const errorCheck = (thisIndex) => {
-    if (answerIndex === thisIndex) {
+    if (isAnswer === thisIndex) {
     } else {
       setIsError(
         isError.map((error, index) => (index === thisIndex ? true : error))
@@ -47,6 +48,7 @@ const easy = () => {
     setNumList(random);
     setRootNum(root);
     setIsError([false, false, false, false]);
+    setAnswer(answerIndex);
     console.log(answerIndex);
   };
 
