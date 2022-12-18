@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import gsap from "gsap";
-import gsapCore from "gsap/gsap-core";
 import React, { useEffect, useState } from "react";
 import { useKey } from "rooks";
 import Nav from "./nav";
@@ -22,9 +21,7 @@ const easy = () => {
 
   // key event
   useKey("ArrowUp", () => {
-    console.log("Up");
     errorCheck(0);
-    console.log(isError);
   });
   useKey("ArrowRight", () => {
     console.log("Right");
@@ -124,16 +121,32 @@ const easy = () => {
           <div id="box1" className="block">
             {rootNum}
           </div>
-          <div id="box2" className={isError[0] ? "block miss" : "block"}>
+          <div
+            id="box2"
+            className={isError[0] ? "block miss" : "block"}
+            onClick={() => errorCheck(0)}
+          >
             {numList[0]}
           </div>
-          <div id="box3" className={isError[1] ? "block miss" : "block"}>
+          <div
+            id="box3"
+            className={isError[1] ? "block miss" : "block"}
+            onClick={() => errorCheck(1)}
+          >
             {numList[1]}
           </div>
-          <div id="box4" className={isError[2] ? "block miss" : "block"}>
+          <div
+            id="box4"
+            className={isError[2] ? "block miss" : "block"}
+            onClick={() => errorCheck(2)}
+          >
             {numList[2]}
           </div>
-          <div id="box5" className={isError[3] ? "block miss" : "block"}>
+          <div
+            id="box5"
+            className={isError[3] ? "block miss" : "block"}
+            onClick={() => errorCheck(3)}
+          >
             {numList[3]}
           </div>
         </div>
