@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import gsap from "gsap";
+import gsapCore from "gsap/gsap-core";
 import React, { useEffect, useState } from "react";
 import { useKey } from "rooks";
 import Nav from "./nav";
@@ -18,6 +20,7 @@ const easy = () => {
     false,
   ]);
 
+  // key event
   useKey("ArrowUp", () => {
     console.log("Up");
     errorCheck(0);
@@ -35,8 +38,11 @@ const easy = () => {
     console.log("Left");
     errorCheck(3);
   });
+  // event judge
   const errorCheck = (thisIndex) => {
-    if (isAnswer === thisIndex) {
+    if (isAnswer == thisIndex) {
+      console.log("correct answer");
+      upDateAllNum();
     } else {
       setIsError(
         isError.map((error, index) => (index === thisIndex ? true : error))
@@ -44,6 +50,7 @@ const easy = () => {
     }
   };
 
+  //set all states
   const upDateStates = (random, root) => {
     setNumList(random);
     setRootNum(root);
@@ -57,8 +64,26 @@ const easy = () => {
     return Math.floor(Math.random() * max) + 1;
   };
 
+  const getRandomIntWithoutAnswerRoot = (max) => {
+    let flag = true;
+    let sub;
+    console.log(answer);
+
+    while (flag) {
+      sub = Math.floor(Math.random() * max) + 1;
+      console.log(sub + "  " + answer);
+
+      if (!primenum.includes(sub)) {
+        flag = false;
+      }
+    }
+
+    return sub;
+  };
+
   //値の更新
   const upDateAllNum = () => {
+    random = [];
     let root = primenum[getRandomInt(5 - 1)];
     answer = root * (getRandomInt(9) + 1);
     answerIndex = getRandomInt(4 - 1);
@@ -66,15 +91,29 @@ const easy = () => {
       if (i === answerIndex) {
         random[i] = answer;
       } else {
-        random[i] =
+        let subRandom =
           getRandomInt(2) - 1
-            ? answer - getRandomInt(3)
-            : answer + getRandomInt(3);
+            ? answer - getRandomIntWithoutAnswerRoot(4)
+            : answer + getRandomIntWithoutAnswerRoot(4);
+        if (random.includes(subRandom)) {
+          i--;
+        } else {
+          random[i] = subRandom;
+        }
       }
     }
     upDateStates(random, root);
   };
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    gsap.fromTo(
+      ".miss",
+      {
+        y: 15,
+      },
+      { y: 0 }
+    );
+  }, [errorCheck]);
 
   return (
     <>
@@ -101,8 +140,8 @@ const easy = () => {
         {/* style----------------------------------------------------------------------------------------------------------------------------------------------- */}
         <style jsx>{`
           .cover {
-            width: 800px;
-            height: 800px;
+            width: 600px;
+            height: 600px;
             margin: 30px auto;
             position: relative;
           }
