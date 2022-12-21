@@ -3,6 +3,7 @@ import gsap from "gsap";
 import React, { useEffect, useState } from "react";
 import { useKey } from "rooks";
 import Nav from "./nav";
+import CountDown from "./countDown";
 
 const easy = () => {
   let answer = 0;
@@ -115,6 +116,8 @@ const easy = () => {
   return (
     <>
       <section>
+        {/* <CountDown></CountDown> */}
+
         <Nav></Nav>
         <div className="cover">
           <button onClick={upDateAllNum}> update</button>
@@ -173,6 +176,7 @@ const easy = () => {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            background-color: green;
           }
           #box2 {
             top: 0%;
