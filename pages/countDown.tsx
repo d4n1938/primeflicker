@@ -8,7 +8,7 @@ const countDown = () => {
     gsap.fromTo(
       "#count3",
       {
-        y: 200,
+        y: 220,
       },
       {
         y: 0,
