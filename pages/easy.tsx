@@ -116,7 +116,7 @@ const easy = () => {
   return (
     <>
       <section>
-        {/* <CountDown></CountDown> */}
+        <CountDown></CountDown>
 
         <Nav></Nav>
         <div className="cover">

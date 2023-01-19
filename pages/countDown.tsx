@@ -1,3 +1,4 @@
+import { duration } from "@mui/material";
 import { display } from "@mui/system";
 import gsap from "gsap";
 import { useEffect } from "react";
@@ -5,16 +6,53 @@ import { useEffect } from "react";
 const countDown = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    gsap.fromTo(
+    var tl = gsap.timeline({});
+
+    tl.fromTo(
       "#count3",
       {
-        y: 220,
+        y: -320,
       },
       {
         y: 0,
         display: "block",
       }
     );
+    tl.to("#count3", { display: "none", duration: 1 });
+    tl.fromTo(
+      "#count2",
+      {
+        y: -320,
+      },
+      {
+        y: 0,
+        display: "block",
+      }
+    );
+    tl.to("#count2", { display: "none", duration: 1 });
+    tl.fromTo(
+      "#count1",
+      {
+        y: -320,
+      },
+      {
+        y: 0,
+        display: "block",
+      }
+    );
+    tl.to("#count1", { display: "none", duration: 1 });
+    tl.fromTo(
+      "#countStart",
+      {
+        y: -320,
+      },
+      {
+        y: 0,
+        display: "block",
+      }
+    );
+    tl.to("#countStart", { display: "none", duration: 1 });
+    tl.to(".coverAll", { display: "none", duration: 0 });
   }, []);
   return (
     <>
@@ -33,26 +71,29 @@ const countDown = () => {
           display: flex;
           width: 100vw;
           height: 100vh;
-          filter: blur(0.5);
           z-index: 100;
           flex: center;
           justify-content: center;
           align-items: center;
+          backdrop-filter: blur(6px);
         }
 
         .countDown {
-          background-color: aqua;
-          width: 200px;
-          height: 200px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           z-index: 150;
           position: relative;
         }
         .countDown > div {
           width: 100px;
-          text-align: center;
           position: absolute;
           color: white;
           font-size: 15vw;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          display: none;
         }
       `}</style>
     </>
